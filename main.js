@@ -11,6 +11,7 @@ const ctx = canvas.getContext('2d');
 
 let colors = ['#FF0000', '#FF3333', '#FF6666', '#FF9999', '#FFCCCC', '#FF6666', '#FF3333', '#FF0000'];
 const originalColors = [...colors];
+let fillText = false;
 
 function resizeCanvas() {
     canvas.width = window.innerWidth;
@@ -34,9 +35,14 @@ function drawFigures() {
         let gradient = ctx.createLinearGradient(0, (i + 1) * 100 - 50, canvas.width, (i + 1) * 100 + 50);
         gradient.addColorStop(0, colors[i]);
         gradient.addColorStop(1, colors[(i + 1) % colors.length]);
+        ctx.fillStyle = gradient;
         ctx.strokeStyle = gradient;
         ctx.lineWidth = 2; // Ajusta el grosor del borde del texto
-        ctx.strokeText('SLEEPLESS', canvas.width / 2, (i + 1) * 100);
+        if (fillText) {
+            ctx.fillText('SLEEPLESS', canvas.width / 2, (i + 1) * 100);
+        } else {
+            ctx.strokeText('SLEEPLESS', canvas.width / 2, (i + 1) * 100);
+        }
     }
 
     // Dibujar la información del evento
@@ -92,6 +98,9 @@ window.addEventListener('keydown', (e) => {
         changeColors();
     } else if (e.code === 'KeyA') {
         resetColors();
+    } else if (e.code === 'KeyK') {
+        fillText = !fillText;
+        drawFigures();
     }
 });
 
