@@ -53,6 +53,16 @@ function drawFigures() {
     ctx.fillText('21 de abril 2:30am', 40, canvas.height - 80);
     ctx.fillText('Palacio de los Deportes.', 40, canvas.height - 60);
     ctx.fillText('Please keep my heart on fire', 40, canvas.height - 40);
+
+    // Dibujar las líneas horizontales negras por encima del texto
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 4;
+    for (let y = 0; y < canvas.height; y += 20) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+        ctx.stroke();
+    }
 }
 
 function invertColors(x, y) {
